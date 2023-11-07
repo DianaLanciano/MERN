@@ -8,7 +8,9 @@ import helmet  from 'helmet'; //Helmet helps secure Express apps by setting HTTP
 import morgan from 'morgan';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import authRoutes from "./routes/auth.js";
+import authRoutes from './routes/auth.js';
+import usersRoutes from './routes/users.js';
+
 import { register } from './controllers/auth.js';
 
 
@@ -40,6 +42,7 @@ app.post('/auth/register', upload.single('picture'), register);
 
 /* ROUTES */
 app.use('/auth', authRoutes);
+app.use('/users', usersRoutes);
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 6001;
