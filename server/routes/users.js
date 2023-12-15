@@ -1,16 +1,17 @@
 import express from 'express';
 import {
     getUser,
-    getUserLikedRecipes,
-    addRemoveLikedRecipes
-} from '../controllers/user.js';
+    getUserRecipes,
+    removeRecipesFromUserList
+} from '../controllers/users.js';
 import { verifyToken } from '../middleware/auth.js';
 
-const routes = express.Router();
+const router = express.Router();
 
-routes.get('/:id', verifyToken, getUser);
-routes.get('/:id/likedRecipes', verifyToken, getUserLikedRecipes);
+/* READ */
+router.get('/:id', verifyToken, getUser);
+router.get('/:id/likedRecipes', verifyToken, getUserRecipes);
+/* UPDATE */
+router.patch('/:id/:recipeId', verifyToken, removeRecipesFromUserList);
 
-router.patch('/:id/:recipeId', verifyToken, addRemoveLikedRecipes);
-
-export default routes;
+export default router;
